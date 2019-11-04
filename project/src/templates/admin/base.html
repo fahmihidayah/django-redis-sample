@@ -1,0 +1,22 @@
+{% extends 'adminlte/base.html' %}
+
+{% block title %}User{% endblock %}
+{% load static %}
+
+{% block nav_sidebar %}
+    {% include 'admin/side_bar.html' %}
+{% endblock %}
+
+{% block body %}
+{{ block.super}}
+    {% block modal %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+
+

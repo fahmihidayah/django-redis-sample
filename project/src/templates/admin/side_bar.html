@@ -1,0 +1,10 @@
+{% extends 'adminlte/lib/_main_sidebar.html' %}
+
+{% block nav_links %}
+<li>
+    <a href="{% url 'profiles:show_self' %}">
+        <i class="fa fa-user"></i> <span>Profile</span>
+    </a>
+</li>
+
+{% endblock nav_links %}
