@@ -7,4 +7,16 @@
     </a>
 </li>
 
+<li>
+    <a href="{% url 'chat_app:list_chat' %}">
+        <i class="fa fa-envelope"></i> <span>Chat history</span>
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'profiles:search_user'%}">
+        <i class="fa fa-search"></i><span>Search</span>
+    </a>
+</li>
+
 {% endblock nav_links %}

@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     "easy_thumbnails",
     "profiles",
     "accounts",
+    'chat_app',
 )
 
 MIDDLEWARE = [
