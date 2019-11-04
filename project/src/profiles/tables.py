@@ -4,6 +4,8 @@ from .models import User
 
 class UserTable(tables.Table):
 
+    chat = tables.TemplateColumn(template_name='profiles/table/chat.html')
+
     class Meta:
         model = User
         fields = ['id', 'email', 'name',]
