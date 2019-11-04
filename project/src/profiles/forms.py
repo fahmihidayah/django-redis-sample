@@ -35,3 +35,16 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = models.Profile
         fields = ["picture", "bio"]
+
+
+class SearchUserForm(forms.Form):
+    keyword = forms.CharField(label='Kata kunci')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Field("keyword"),
+            Submit("search", "Cari", css_class="btn-success"),
+        )

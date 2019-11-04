@@ -1,6 +1,8 @@
 {% extends "admin/base.html" %}
 
 {% load staticfiles %}
+
+{% load django_tables2 %}
 {% load crispy_forms_tags %}
 {% load thumbnail %}
 
@@ -9,10 +11,25 @@
 <!-- Benefits of the Django application -->
 {% block content %}
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-3">
             <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Cari</h3>
+                </div>
                 <div class="box-body">
-                    <p>Search profile</p>
+                    <form method="get">
+                        {% crispy search_form %}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">Hasil</h3>
+                </div>
+                <div class="box-body">
+                    {% render_table table %}
                 </div>
             </div>
         </div>

@@ -3,8 +3,10 @@ from django.views import generic
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django_tables2 import SingleTableView
 from . import forms
 from . import models
+from . import tables
 
 
 class ShowProfile(LoginRequiredMixin, generic.TemplateView):
@@ -61,5 +63,12 @@ class EditProfile(LoginRequiredMixin, generic.TemplateView):
         return redirect("profiles:show_self")
 
 
-class SearchUserView(LoginRequiredMixin, generic.TemplateView):
+class SearchUserView(LoginRequiredMixin, SingleTableView):
     template_name = "profiles/search_profile.html"
+    paginate_by = 10
+    model = models.User
+    table_class = tables.UserTable
+    extra_context = {'search_form': forms.SearchUserForm()}
+
+
+
