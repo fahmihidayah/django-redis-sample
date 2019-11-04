@@ -21,7 +21,9 @@ class ChatView(generic.TemplateView):
 class CreateChanelView(generic.View):
     http_method_names = ['post']
 
-    def post(self, ):
+    def post(self, request, *args, **kwargs):
+        print(self.request.POST['id'])
         # target_user : User = User.objects.filter(pk=self.kwargs['pk'])
-        print('target user {}'.format(self.kwargs.get('pk')))
-        return reverse('chat_app:chanel_detail', args=(1,))
+        # print('target user {}'.format(self.kwargs.get('pk')))
+        # return redirect('chat_app:chanel_detail', args=(1,))
+        return redirect('chat_app:chanel_detail')

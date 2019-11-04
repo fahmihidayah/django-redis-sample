@@ -1,4 +1,5 @@
-<form method="post" action="{% url 'chat_app:create_chanel' record.id  %}">
+<form method="post" action="{% url 'chat_app:create_chanel'%}">
     {% csrf_token %}
+    <input type="hidden" name="id" value="{{record.id}}"/>
     <button type="submit" class="btn btn-success btn-sm">Chat</button>
 </form>
