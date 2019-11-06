@@ -74,10 +74,12 @@ class SearchUserView(LoginRequiredMixin, SingleTableView):
         form: forms.SearchUserForm = forms.SearchUserForm(self.request.GET)
         if form.is_valid():
             keyword = form.cleaned_data['keyword']
-            return models.User.objects.filter(models.models.Q(email__icontains=keyword) |
+            return models.User.objects.filter(~models.models.Q(pk=self.request.user.pk) &
+                                              (models.models.Q(email__icontains=keyword) |
                                               models.models.Q(name__icontains=keyword))
+                                              )
 
-        return models.User.objects.all()
+        return models.User.objects.filter(~models.models.Q(pk=self.request.user.pk))
 
 
 

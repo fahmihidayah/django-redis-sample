@@ -1,6 +1,7 @@
 {% extends "admin/base.html" %}
 
 {% load staticfiles %}
+{% load django_tables2 %}
 {% load crispy_forms_tags %}
 {% load thumbnail %}
 
@@ -11,8 +12,11 @@
     <div class="row">
         <div class="col-md-12">
             <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">List chat</h3>
+                </div>
                 <div class="box-body">
-                    <p>Hello world</p>
+                     {% render_table table %}
                 </div>
             </div>
         </div>
