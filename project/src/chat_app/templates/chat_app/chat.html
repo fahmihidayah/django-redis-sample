@@ -19,41 +19,52 @@
 
                     <div class="direct-chat-messages">
                         <!-- Message. Default to the left -->
+                        {% for data in datas%}
+                        {% if data.user == show_user %}
+
+                            <!--self chat -->
+                            <div class="direct-chat-msg right">
+                                <div class="direct-chat-info clearfix">
+                                    <span class="direct-chat-name pull-right">{{data.user.name}}</span>
+                                    <span class="direct-chat-timestamp pull-left">{{data.created}}</span>
+                                </div>
+                                <!-- /.direct-chat-info -->
+                                <img class="direct-chat-img"
+                                     src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}"
+                                     alt="Message User Image">
+                                <!-- /.direct-chat-img -->
+                                <div class="direct-chat-text">
+                                    {{data.message}}
+                                </div>
+                                <!-- /.direct-chat-text -->
+                            </div>
+                        {% else %}
                         <div class="direct-chat-msg">
                             <div class="direct-chat-info clearfix">
-                                <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                                <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                                <span class="direct-chat-name pull-left">{{data.user.name}}</span>
+                                <span class="direct-chat-timestamp pull-right">{{data.created}}</span>
                             </div>
                             <!-- /.direct-chat-info -->
-                            <img class="direct-chat-img" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}" alt="Message User Image">
+                            <img class="direct-chat-img"
+                                 src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}"
+                                 alt="Message User Image">
                             <!-- /.direct-chat-img -->
                             <div class="direct-chat-text">
-                                Is this template really for free? That's unbelievable!
+                                {{data.message}}
                             </div>
                             <!-- /.direct-chat-text -->
                         </div>
-                        <!-- /.direct-chat-msg -->
+                        {% endif %}
 
-                        <!-- Message to the right -->
-                        <div class="direct-chat-msg right">
-                            <div class="direct-chat-info clearfix">
-                                <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                                <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                            </div>
-                            <!-- /.direct-chat-info -->
-                            <img class="direct-chat-img" src="{% thumbnail show_user.profile.picture|default:'default_profile.png' 140x140 crop %}" alt="Message User Image">
-                            <!-- /.direct-chat-img -->
-                            <div class="direct-chat-text">
-                                You better believe it!
-                            </div>
-                            <!-- /.direct-chat-text -->
-                        </div>
-                        <!-- /.direct-chat-msg -->
+                        {% endfor %}
+
                     </div>
                 </div>
                 <div class="box-footer">
-                    <form action="#" method="post">
+                    <form action="{% url 'chat_app:send_message' %}" method="post">
                         <div class="input-group">
+                            {% csrf_token %}
+                            <input type="hidden" name="id_chanel" value="{{ id_chanel }}">
                             <input type="text" name="message" placeholder="Type Message ..." class="form-control">
                             <span class="input-group-btn">
                         <button type="submit" class="btn btn-primary btn-flat">Send</button>

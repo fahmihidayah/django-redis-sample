@@ -26,14 +26,26 @@ class ListChatView(LoginRequiredMixin, SingleTableView):
 class SendMessageView(LoginRequiredMixin, generic.TemplateView):
     template_name = "chat_app/list_chat.html"
 
+    def post(self, *args, **kwargs):
+        id_chanel = self.request.POST.get('id_chanel')
+        message : models.MessageData = models.MessageData()
+        message.user = self.request.user
+        message.message = self.request.POST.get('message')
+        message.chanel = models.ChanelData.objects.get(pk=id_chanel)
+        message.save()
+        return redirect('chat_app:chanel_detail', pk=id_chanel)
+
 
 class ChatView(LoginRequiredMixin, generic.TemplateView):
     template_name = "chat_app/chat.html"
 
-
-    def get(self, request, *args, **kwargs):
-
-        return super(ChatView, self).get(request, *args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(ChatView, self).get_context_data(**kwargs)
+        context['id_chanel'] = kwargs['pk']
+        context['show_user'] = self.request.user
+        datas = models.MessageData.objects.filter(chanel__pk=kwargs['pk'])
+        context['datas'] = datas
+        return context
 
 
 class CreateChanelView(LoginRequiredMixin, generic.View):
