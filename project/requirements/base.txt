@@ -10,7 +10,7 @@ django-adminlte2
 django_tables2
 django-role-permissions==2.2.1
 django-extensions==2.1.5
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 uwsgi==2.0.18
 psycopg2-binary==2.7.5
 django-guardian
